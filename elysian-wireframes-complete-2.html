@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elysian — Complete Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #0E0C0B;
+  --dark2: #1A1614;
+  --card: #1E1A18;
+  --card2: #252120;
+  --cream: #F7F3EE;
+  --accent: #C9956A;
+  --accent-light: #E8D5C4;
+  --muted: #6B6460;
+  --line: rgba(255,255,255,0.07);
+  --line2: rgba(255,255,255,0.12);
+  --white: #FDFBF9;
+  --green: #4CAF50;
+  --red: #E05656;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#080706;font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 80px;}
+
+/* PAGE HEADER */
+.page-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--cream);margin-bottom:6px;text-align:center;}
+.page-title span{color:var(--accent);font-style:italic;}
+.page-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:28px;text-align:center;}
+
+/* SCREEN NAV */
+.screen-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px;max-width:700px;}
+.snav-btn{padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--muted);font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
+.snav-btn:hover{border-color:var(--accent);color:var(--accent);}
+.snav-btn.active{background:var(--accent);color:var(--dark);border-color:var(--accent);font-weight:500;}
+
+/* PHONE */
+.phone-wrap{position:relative;width:375px;filter:drop-shadow(0 32px 64px rgba(0,0,0,0.9));}
+.phone-frame{background:#111;border-radius:48px;padding:14px;border:1.5px solid rgba(255,255,255,0.07);}
+.phone-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:110px;height:32px;background:#0A0908;border-radius:0 0 18px 18px;z-index:200;display:flex;align-items:center;justify-content:center;}
+.notch-cam{width:9px;height:9px;border-radius:50%;background:#1A1614;border:1.5px solid #2A2422;}
+.phone-screen{background:var(--dark);border-radius:38px;overflow:hidden;height:780px;position:relative;}
+
+/* SCREENS */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--dark);}
+.screen.active{display:flex;}
+
+/* STATUS BAR */
+.sbar{height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 8px;flex-shrink:0;z-index:50;position:relative;}
+.sbar-time{font-size:13px;font-weight:500;color:var(--cream);}
+.sbar-icons{display:flex;align-items:center;gap:4px;}
+
+/* TOP NAV */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 12px;flex-shrink:0;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--cream);letter-spacing:2px;}
+.nav-logo span{color:var(--accent);}
+.nav-icon-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.nav-icon-btn svg{width:20px;height:20px;fill:none;stroke:var(--cream);stroke-width:1.5;}
+.nav-actions{display:flex;gap:8px;align-items:center;}
+
+/* BOTTOM NAV */
+.bottomnav{position:absolute;bottom:0;left:0;right:0;height:78px;background:rgba(14,12,11,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;padding:0 8px 16px;z-index:100;}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;flex:1;padding:8px 0;}
+.bn-item svg{width:22px;height:22px;fill:none;stroke:var(--muted);stroke-width:1.5;transition:stroke 0.2s;}
+.bn-item.active svg{stroke:var(--accent);}
+.bn-label{font-size:9px;color:var(--muted);letter-spacing:0.5px;}
+.bn-item.active .bn-label{color:var(--accent);}
+.bn-center{width:48px;height:48px;background:var(--accent);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-top:-12px;flex-shrink:0;}
+.bn-center svg{stroke:var(--dark);width:22px;height:22px;}
+
+/* SCROLL AREA */
+.scroll{flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:78px;}
+.scroll::-webkit-scrollbar{display:none;}
+
+/* TYPOGRAPHY */
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.screen-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--cream);line-height:1.2;}
+.screen-title em{color:var(--accent);font-style:italic;}
+.body-text{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* BUTTONS */
+.btn-primary{width:100%;padding:14px;background:var(--accent);color:var(--dark);border:none;border-radius:12px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px;}
+.btn-primary:hover{background:#D4A078;}
+.btn-secondary{width:100%;padding:13px;background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,0.15);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.btn-ghost{background:transparent;border:none;color:var(--accent);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:underline;}
+
+/* INPUTS */
+.input-group{margin-bottom:14px;}
+.input-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block;}
+.input-field{width:100%;padding:13px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--cream);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+.input-field:focus{border-color:var(--accent);}
+.input-field::placeholder{color:var(--muted);}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0;}
+.divider-line{flex:1;height:1px;background:rgba(255,255,255,0.08);}
+.divider-text{font-size:12px;color:var(--muted);}
+
+/* CARDS */
+.card{background:var(--card);border-radius:14px;overflow:hidden;}
+.card-pad{padding:16px;}
+
+/* TAGS */
+.tag-pill{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;}
+.tag-accent{background:rgba(201,149,106,0.15);color:var(--accent);border:1px solid rgba(201,149,106,0.3);}
+.tag-green{background:rgba(76,175,80,0.15);color:var(--green);}
+.tag-muted{background:rgba(255,255,255,0.06);color:var(--muted);}
+
+/* AVATAR */
+.avatar{border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.avatar-sm{width:36px;height:36px;font-size:14px;}
+.avatar-md{width:48px;height:48px;font-size:18px;}
+.avatar-lg{width:72px;height:72px;font-size:28px;}
+.avatar-bordered{border:2px solid var(--accent);}
+
+/* STARS */
+.stars{color:var(--accent);font-size:13px;letter-spacing:1px;}
+
+/* ========================================
+   SCREEN 1 — SPLASH / LOGIN
+   ======================================== */
+#screen-login{background:var(--dark2);}
+.login-hero{position:relative;height:320px;overflow:hidden;flex-shrink:0;}
+.login-hero-bg{width:100%;height:100%;background:linear-gradient(160deg,#2D1F1A,#1A0F0C,#3D2518);position:relative;display:flex;align-items:center;justify-content:center;}
+.login-deco{position:absolute;border-radius:50%;filter:blur(50px);}
+.login-hero-content{position:relative;z-index:2;text-align:center;}
+.login-hero-logo{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--cream);letter-spacing:6px;}
+.login-hero-logo span{color:var(--accent);}
+.login-hero-tagline{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(247,243,238,0.5);margin-top:8px;}
+.login-hero-overlay{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,var(--dark2),transparent);}
+.login-body{padding:28px 24px;flex:1;}
+
+/* ========================================
+   SCREEN 2 — REGISTER
+   ======================================== */
+#screen-register{background:var(--dark2);}
+.register-body{padding:20px 24px;flex:1;overflow-y:auto;scrollbar-width:none;}
+.register-body::-webkit-scrollbar{display:none;}
+.back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;cursor:pointer;margin-bottom:24px;}
+.back-btn svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;}
+
+/* ========================================
+   SCREEN 3 — ONBOARDING
+   ======================================== */
+.ob-progress{display:flex;gap:6px;padding:0 24px;margin-bottom:24px;}
+.ob-dot{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);}
+.ob-dot.done{background:var(--accent);}
+.ob-dot.active{background:var(--accent);opacity:0.5;}
+.ob-body{padding:0 24px;flex:1;}
+.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.style-card{border-radius:14px;overflow:hidden;aspect-ratio:1;position:relative;cursor:pointer;border:2px solid transparent;transition:all 0.2s;}
+.style-card.selected{border-color:var(--accent);}
+.style-card-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+.style-card-label{position:absolute;bottom:0;left:0;right:0;padding:8px;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);font-size:11px;color:var(--cream);letter-spacing:1px;text-transform:uppercase;}
+.style-check{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--accent);display:none;align-items:center;justify-content:center;}
+.style-card.selected .style-check{display:flex;}
+
+/* ========================================
+   SCREEN 4 — FEED (already done, simplified)
+   ======================================== */
+.stories{display:flex;gap:12px;padding:0 16px 14px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+.stories::-webkit-scrollbar{display:none;}
+.story{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;cursor:pointer;}
+.story-ring{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#E8A87C);padding:2px;}
+.story-ring.seen{background:rgba(255,255,255,0.08);}
+.story-av{width:100%;height:100%;border-radius:50%;background:var(--card);border:2px solid var(--dark);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.story-name{font-size:10px;color:var(--muted);max-width:54px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
+.feed-tabs{display:flex;gap:0;padding:0 16px;margin-bottom:12px;flex-shrink:0;}
+.ftab{font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;color:var(--muted);}
+.ftab.active{background:var(--accent);color:var(--dark);font-weight:500;}
+.post{margin-bottom:2px;}
+.post-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 8px;}
+.post-author{display:flex;align-items:center;gap:10px;}
+.post-av{width:34px;height:34px;border-radius:50%;background:var(--card);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.post-name{font-size:13px;font-weight:500;color:var(--cream);}
+.post-loc{font-size:10px;color:var(--muted);}
+.post-img{position:relative;width:100%;}
+.post-img-bg{width:100%;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.post-deco{position:absolute;border-radius:50%;filter:blur(40px);}
+.bookable-tag{position:absolute;background:rgba(14,12,11,0.88);backdrop-filter:blur(12px);border:1px solid rgba(201,149,106,0.4);border-radius:20px;padding:6px 12px 6px 8px;display:flex;align-items:center;gap:7px;cursor:pointer;z-index:10;transition:all 0.2s;}
+.bookable-tag:active{transform:scale(0.97);}
+.tag-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
+.tag-info{}
+.tag-salon{font-size:11px;font-weight:500;color:var(--cream);white-space:nowrap;}
+.tag-service{font-size:9px;color:var(--accent);white-space:nowrap;}
+.tag-home{font-size:9px;background:rgba(201,149,106,0.15);color:var(--accent);border-radius:3px;padding:1px 5px;white-space:nowrap;}
+.post-actions{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 4px;}
+.post-acts-left{display:flex;gap:16px;}
+.act-btn{display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--muted);}
+.act-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;}
+.act-btn.liked svg{stroke:var(--red);fill:var(--red);}
+.act-btn span{font-size:12px;}
+.post-caption{padding:2px 16px 14px;font-size:12px;color:var(--muted);}
+.cap-name{font-weight:500;color:var(--cream);margin-right:5px;}
+.cap-tag{color:var(--accent);}
+
+/* BOTTOM SHEET */
+.bs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s;border-radius:38px;}
+.bs-overlay.open{opacity:1;pointer-events:all;}
+.bs{position:absolute;bottom:0;left:0;right:0;background:var(--dark2);border-radius:24px 24px 0 0;z-index:201;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);border-top:1px solid rgba(255,255,255,0.08);}
+.bs.open{transform:translateY(0);}
+.bs-handle{width:36px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:12px auto 0;}
+.bs-cover{height:130px;position:relative;overflow:hidden;}
+.bs-cover-bg{width:100%;height:100%;background:linear-gradient(135deg,#2D1F1A,#3D2518);display:flex;align-items:center;justify-content:center;}
+.bs-cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--dark2),transparent 60%);}
+.bs-salon-av{position:absolute;bottom:-18px;left:20px;width:44px;height:44px;border-radius:10px;background:var(--card);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.bs-body{padding:26px 20px 24px;}
+.bs-salon-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px;}
+.bs-salon-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--cream);}
+.bs-rating{font-size:13px;color:var(--accent);font-weight:500;}
+.bs-meta{display:flex;gap:14px;margin-bottom:16px;}
+.bs-meta-item{font-size:11px;color:var(--muted);}
+.service-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,0.04);border-radius:10px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;margin-bottom:8px;transition:all 0.2s;}
+.service-item.selected{background:rgba(201,149,106,0.1);border-color:var(--accent);}
+.svc-name{font-size:13px;color:var(--cream);}
+.svc-dur{font-size:10px;color:var(--muted);margin-top:2px;}
+.svc-price{font-size:14px;font-weight:500;color:var(--accent);}
+.slots-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.slots-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;}
+.slots-row::-webkit-scrollbar{display:none;}
+.slot{flex-shrink:0;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);font-size:12px;color:var(--cream);cursor:pointer;transition:all 0.2s;text-align:center;}
+.slot-day{font-size:9px;color:var(--muted);margin-bottom:2px;}
+.slot.selected,.slot:hover{background:var(--accent);border-color:var(--accent);color:var(--dark);}
+.slot.selected .slot-day,.slot:hover .slot-day{color:rgba(14,12,11,0.7);}
+.slot.unavail{opacity:0.3;cursor:not-allowed;}
+.bs-cta{display:flex;gap:10px;}
+.bs-profile-btn{width:48px;height:48px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.bs-profile-btn svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.5;}
+
+/* ========================================
+   SCREEN 5 — SEARCH
+   ======================================== */
+.search-bar-wrap{padding:0 16px;margin-bottom:14px;}
+.search-input-wrap{position:relative;}
+.search-input{width:100%;padding:12px 16px 12px 42px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:var(--cream);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;}
+.search-input::placeholder{color:var(--muted);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.5;}
+.filters-row{display:flex;gap:8px;padding:0 16px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;}
+.filters-row::-webkit-scrollbar{display:none;}
+.filter-chip{flex-shrink:0;padding:7px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.2s;}
+.filter-chip.active{background:var(--accent);color:var(--dark);border-color:var(--accent);}
+.result-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);cursor:pointer;}
+.result-img{width:60px;height:60px;border-radius:12px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden;}
+.result-info{flex:1;}
+.result-name{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:3px;}
+.result-meta{font-size:11px;color:var(--muted);}
+.result-right{text-align:right;}
+.result-price{font-size:13px;color:var(--accent);font-weight:500;}
+.result-rating{font-size:11px;color:var(--muted);}
+.map-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);font-size:12px;color:var(--muted);cursor:pointer;flex-shrink:0;}
+.map-btn svg{width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:1.5;}
+
+/* ========================================
+   SCREEN 6 — PROVIDER PROFILE
+   ======================================== */
+.provider-cover{height:200px;position:relative;overflow:hidden;flex-shrink:0;}
+.provider-cover-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.provider-cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--dark),transparent 50%);}
+.provider-av{position:absolute;bottom:-24px;left:20px;width:64px;height:64px;border-radius:16px;background:var(--card);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:26px;}
+.back-arrow{position:absolute;top:16px;left:16px;width:36px;height:36px;background:rgba(0,0,0,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;}
+.back-arrow svg{width:18px;height:18px;fill:none;stroke:var(--cream);stroke-width:2;}
+.provider-body{padding:32px 20px 0;flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:100px;}
+.provider-body::-webkit-scrollbar{display:none;}
+.provider-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--cream);margin-bottom:4px;}
+.provider-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.provider-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.provider-stats{display:flex;gap:0;margin-bottom:20px;}
+.pstat{flex:1;text-align:center;padding:14px 0;border-right:1px solid var(--line);}
+.pstat:last-child{border-right:none;}
+.pstat-val{font-size:18px;font-weight:500;color:var(--cream);}
+.pstat-label{font-size:10px;color:var(--muted);margin-top:2px;}
+.services-list{}
+.svc-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);}
+.svc-row:last-child{border-bottom:none;}
+.portfolio-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:20px;}
+.portfolio-item{aspect-ratio:1;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px;border-radius:4px;}
+
+/* ========================================
+   SCREEN 7 — CHAT
+   ======================================== */
+.chat-header{display:flex;align-items:center;gap:12px;padding:10px 16px 14px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.chat-av{width:40px;height:40px;border-radius:50%;background:var(--card);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.chat-info{}
+.chat-name{font-size:14px;font-weight:500;color:var(--cream);}
+.chat-booking{font-size:11px;color:var(--accent);}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none;padding-bottom:80px;}
+.chat-msgs::-webkit-scrollbar{display:none;}
+.msg{max-width:75%;display:flex;flex-direction:column;gap:3px;}
+.msg-bubble{padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5;}
+.msg-time{font-size:10px;color:var(--muted);}
+.msg.received .msg-bubble{background:var(--card);color:var(--cream);border-radius:4px 16px 16px 16px;}
+.msg.sent{align-self:flex-end;align-items:flex-end;}
+.msg.sent .msg-bubble{background:var(--accent);color:var(--dark);border-radius:16px 4px 16px 16px;}
+.booking-card-chat{background:var(--card);border:1px solid rgba(201,149,106,0.2);border-radius:12px;padding:14px;margin:8px 16px;}
+.bcc-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.bcc-service{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:3px;}
+.bcc-detail{font-size:12px;color:var(--muted);}
+.chat-input-wrap{position:absolute;bottom:0;left:0;right:0;padding:12px 16px 24px;background:rgba(14,12,11,0.97);border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;}
+.chat-input{flex:1;padding:11px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:22px;color:var(--cream);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;}
+.chat-input::placeholder{color:var(--muted);}
+.chat-send{width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.chat-send svg{width:16px;height:16px;fill:none;stroke:var(--dark);stroke-width:2;}
+
+/* ========================================
+   SCREEN 8 — USER PROFILE
+   ======================================== */
+.profile-header{padding:20px;display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.profile-info{}
+.profile-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--cream);}
+.profile-handle{font-size:12px;color:var(--muted);margin-top:2px;}
+.profile-stats-row{display:flex;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-shrink:0;}
+.psr-item{flex:1;padding:14px 0;text-align:center;border-right:1px solid var(--line);}
+.psr-item:last-child{border-right:none;}
+.psr-val{font-size:20px;font-weight:500;color:var(--cream);}
+.psr-label{font-size:10px;color:var(--muted);margin-top:2px;}
+.booking-hist-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);cursor:pointer;}
+.bhi-img{width:48px;height:48px;border-radius:10px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.bhi-info{flex:1;}
+.bhi-name{font-size:13px;font-weight:500;color:var(--cream);}
+.bhi-detail{font-size:11px;color:var(--muted);margin-top:2px;}
+.bhi-status{font-size:11px;font-weight:500;}
+.bhi-status.completed{color:var(--green);}
+.bhi-status.upcoming{color:var(--accent);}
+
+/* ========================================
+   SCREEN 9 — REVIEWS
+   ======================================== */
+.review-summary{padding:20px;text-align:center;border-bottom:1px solid var(--line);flex-shrink:0;}
+.review-big-score{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--cream);line-height:1;}
+.review-stars-big{font-size:20px;color:var(--accent);letter-spacing:3px;margin:4px 0;}
+.review-count{font-size:12px;color:var(--muted);}
+.review-bars{padding:16px 20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.review-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.rbar-label{font-size:11px;color:var(--muted);width:14px;text-align:right;}
+.rbar-track{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.rbar-fill{height:100%;background:var(--accent);border-radius:2px;}
+.rbar-pct{font-size:10px;color:var(--muted);width:28px;}
+.review-item{padding:16px;border-bottom:1px solid var(--line);}
+.review-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.review-user{display:flex;align-items:center;gap:10px;}
+.review-av{width:36px;height:36px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.review-name{font-size:13px;font-weight:500;color:var(--cream);}
+.review-date{font-size:11px;color:var(--muted);}
+.review-text{font-size:13px;color:var(--muted);line-height:1.6;}
+.review-photo{width:60px;height:60px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:22px;margin-top:10px;}
+.write-review-bar{position:absolute;bottom:0;left:0;right:0;padding:12px 16px 24px;background:rgba(14,12,11,0.97);border-top:1px solid var(--line);}
+
+/* ========================================
+   SCREEN 10 — DASHBOARD
+   ======================================== */
+.dash-header{padding:8px 20px 16px;flex-shrink:0;}
+.dash-greeting{font-size:12px;color:var(--muted);margin-bottom:4px;}
+.dash-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--cream);}
+.dash-name span{color:var(--accent);font-style:italic;}
+.dash-stats{display:flex;gap:10px;padding:0 20px;margin-bottom:16px;flex-shrink:0;}
+.ds-card{flex:1;background:var(--card);border-radius:14px;padding:14px;border:1px solid var(--line);}
+.ds-val{font-size:22px;font-weight:500;color:var(--cream);}
+.ds-label{font-size:10px;color:var(--muted);margin-top:3px;}
+.ds-trend{font-size:10px;color:var(--green);margin-top:2px;}
+.booking-item{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);cursor:pointer;}
+.bi-time{width:50px;text-align:center;flex-shrink:0;}
+.bi-hour{font-size:15px;font-weight:500;color:var(--cream);}
+.bi-ampm{font-size:10px;color:var(--muted);}
+.bi-line{width:2px;height:40px;border-radius:2px;flex-shrink:0;}
+.bi-line.confirmed{background:var(--green);}
+.bi-line.pending{background:var(--accent);}
+.bi-info{flex:1;}
+.bi-name{font-size:13px;font-weight:500;color:var(--cream);}
+.bi-service{font-size:11px;color:var(--muted);margin-top:2px;}
+.bi-status{font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;}
+.bi-status.confirmed{background:rgba(76,175,80,0.15);color:var(--green);}
+.bi-status.pending{background:rgba(201,149,106,0.15);color:var(--accent);}
+.dash-tab-row{display:flex;border-bottom:1px solid var(--line);flex-shrink:0;}
+.dtab{flex:1;padding:12px;text-align:center;font-size:12px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+.dtab.active{color:var(--accent);border-bottom-color:var(--accent);}
+</style>
+</head>
+<body>
+
+<div class="page-title">Elysian <span>Wireframes</span></div>
+<div class="page-sub">Complete App — All Screens Interactive</div>
+
+<!-- SCREEN NAV -->
+<div class="screen-nav">
+  <button class="snav-btn active" onclick="goTo('login')">01 · Login</button>
+  <button class="snav-btn" onclick="goTo('register')">02 · Register</button>
+  <button class="snav-btn" onclick="goTo('onboarding')">03 · Onboarding</button>
+  <button class="snav-btn" onclick="goTo('feed')">04 · Feed</button>
+  <button class="snav-btn" onclick="goTo('search')">05 · Search</button>
+  <button class="snav-btn" onclick="goTo('provider')">06 · Provider Profile</button>
+  <button class="snav-btn" onclick="goTo('chat')">07 · Chat</button>
+  <button class="snav-btn" onclick="goTo('userprofile')">08 · My Profile</button>
+  <button class="snav-btn" onclick="goTo('reviews')">09 · Reviews</button>
+  <button class="snav-btn" onclick="goTo('dashboard')">10 · Dashboard</button>
+  <button class="snav-btn" onclick="goTo('notifications')">11 · Notifications</button>
+  <button class="snav-btn" onclick="goTo('bookingconfirm')">12 · Booking Confirm</button>
+  <button class="snav-btn" onclick="goTo('provideronboard')">13 · Provider Setup</button>
+  <button class="snav-btn" onclick="goTo('createpost')">14 · Create Post</button>
+  <button class="snav-btn" onclick="goTo('availability')">15 · Availability</button>
+  <button class="snav-btn" onclick="goTo('settings')">16 · Settings</button>
+  <button class="snav-btn" onclick="goTo('forgotpw')">17 · Forgot Password</button>
+  <button class="snav-btn" onclick="goTo('bookingslist')">18 · My Bookings</button>
+  <button class="snav-btn" onclick="goTo('clientpost')">19 · Client Post</button>
+  <button class="snav-btn" onclick="goTo('stories')">20 · Stories</button>
+</div>
+
+<!-- PHONE -->
+<div class="phone-wrap">
+  <div class="phone-frame">
+    <div class="phone-notch"><div class="notch-cam"></div></div>
+    <div class="phone-screen">
+
+      <!-- ============ SCREEN 1: LOGIN ============ -->
+      <div class="screen active" id="screen-login">
+        <div class="login-hero">
+          <div class="login-hero-bg">
+            <div class="login-deco" style="width:200px;height:200px;background:var(--accent);top:-60px;right:-40px;opacity:0.25;"></div>
+            <div class="login-deco" style="width:150px;height:150px;background:#8B4513;bottom:-30px;left:-30px;opacity:0.2;"></div>
+            <div class="login-hero-content">
+              <div class="login-hero-logo">EL<span>Y</span>SIAN</div>
+              <div class="login-hero-tagline">Beauty · Discover · Book</div>
+            </div>
+          </div>
+          <div class="login-hero-overlay"></div>
+        </div>
+        <div class="login-body">
+          <div class="section-label" style="margin-bottom:6px;">Welcome back</div>
+          <div class="screen-title" style="margin-bottom:20px;">Sign <em>in</em></div>
+          <div class="input-group">
+            <label class="input-label">Email</label>
+            <input class="input-field" placeholder="amara@email.com" type="email">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Password</label>
+            <input class="input-field" placeholder="••••••••" type="password">
+          </div>
+          <div style="text-align:right;margin-bottom:20px;"><button class="btn-ghost">Forgot password?</button></div>
+          <button class="btn-primary" style="margin-bottom:12px;" onclick="goTo('feed')">Sign In</button>
+          <div class="divider"><div class="divider-line"></div><span class="divider-text">or</span><div class="divider-line"></div></div>
+          <button class="btn-secondary" style="margin-bottom:16px;">
+            <span style="display:flex;align-items:center;justify-content:center;gap:8px;">
+              <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              Continue with Google
+            </span>
+          </button>
+          <div style="text-align:center;font-size:13px;color:var(--muted);">No account? <button class="btn-ghost" onclick="goTo('register')">Create one</button></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 2: REGISTER ============ -->
+      <div class="screen" id="screen-register">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="register-body">
+          <div class="back-btn" onclick="goTo('login')">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </div>
+          <div class="section-label">Join Elysian</div>
+          <div class="screen-title" style="margin-bottom:20px;">Create <em>account</em></div>
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <div class="input-group" style="flex:1;margin-bottom:0;">
+              <label class="input-label">First name</label>
+              <input class="input-field" placeholder="Amara">
+            </div>
+            <div class="input-group" style="flex:1;margin-bottom:0;">
+              <label class="input-label">Last name</label>
+              <input class="input-field" placeholder="Koné">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email</label>
+            <input class="input-field" placeholder="amara@email.com" type="email">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Phone</label>
+            <input class="input-field" placeholder="+237 6XX XXX XXX" type="tel">
+          </div>
+          <div class="input-group">
+            <label class="input-label">City</label>
+            <input class="input-field" placeholder="Douala">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Password</label>
+            <input class="input-field" placeholder="••••••••" type="password">
+          </div>
+          <div style="margin-bottom:20px;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">I am joining as :</div>
+            <div style="display:flex;gap:10px;">
+              <div style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--accent);text-align:center;cursor:pointer;background:rgba(201,149,106,0.08);">
+                <div style="font-size:18px;margin-bottom:4px;">👤</div>
+                <div style="font-size:12px;color:var(--cream);font-weight:500;">Client</div>
+              </div>
+              <div style="flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);text-align:center;cursor:pointer;">
+                <div style="font-size:18px;margin-bottom:4px;">💼</div>
+                <div style="font-size:12px;color:var(--muted);">Provider</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-bottom:12px;" onclick="goTo('onboarding')">Create Account</button>
+          <div style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6;">By creating an account you agree to our <span style="color:var(--accent);">Terms of Service</span> and <span style="color:var(--accent);">Privacy Policy</span></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 3: ONBOARDING ============ -->
+      <div class="screen" id="screen-onboarding">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="ob-progress">
+          <div class="ob-dot done"></div>
+          <div class="ob-dot active"></div>
+          <div class="ob-dot"></div>
+          <div class="ob-dot"></div>
+          <div class="ob-dot"></div>
+        </div>
+        <div class="ob-body" style="overflow-y:auto;scrollbar-width:none;padding-bottom:100px;">
+          <div class="section-label">Step 2 of 5</div>
+          <div class="screen-title" style="margin-bottom:6px;">Your <em>style</em></div>
+          <div class="body-text">Pick the looks that inspire you most. We'll personalise your feed.</div>
+          <div class="style-grid">
+            <div class="style-card selected" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#2D1F1A,#4A2C1A);">
+                <span style="font-size:36px;">🌿</span>
+              </div>
+              <div class="style-card-label">Natural Hair</div>
+              <div class="style-check">✓</div>
+            </div>
+            <div class="style-card" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#1A1A2E,#16213E);">
+                <span style="font-size:36px;">💄</span>
+              </div>
+              <div class="style-card-label">Glam Makeup</div>
+              <div class="style-check">✓</div>
+            </div>
+            <div class="style-card selected" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#2A1A2A,#3D1A3D);">
+                <span style="font-size:36px;">💅</span>
+              </div>
+              <div class="style-card-label">Nail Art</div>
+              <div class="style-check">✓</div>
+            </div>
+            <div class="style-card" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#1A2A1A,#1A3D1A);">
+                <span style="font-size:36px;">🌸</span>
+              </div>
+              <div class="style-card-label">Skincare</div>
+              <div class="style-check">✓</div>
+            </div>
+            <div class="style-card" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#2A2A1A,#3D3D1A);">
+                <span style="font-size:36px;">👰</span>
+              </div>
+              <div class="style-card-label">Bridal</div>
+              <div class="style-check">✓</div>
+            </div>
+            <div class="style-card" onclick="toggleStyle(this)">
+              <div class="style-card-bg" style="background:linear-gradient(135deg,#1A2A2A,#1A3D3D);">
+                <span style="font-size:36px;">✨</span>
+              </div>
+              <div class="style-card-label">Editorial</div>
+              <div class="style-check">✓</div>
+            </div>
+          </div>
+          <div style="margin-top:24px;display:flex;gap:10px;">
+            <button class="btn-secondary" onclick="goTo('register')">Back</button>
+            <button class="btn-primary" onclick="goTo('feed')">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 4: FEED ============ -->
+      <div class="screen" id="screen-feed">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="nav-logo">EL<span>Y</span>SIAN</div>
+          <div class="nav-actions">
+            <div class="nav-icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+            <div class="nav-icon-btn" style="position:relative;">
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--cream);stroke-width:1.5;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <div style="position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--accent);border-radius:50%;border:1.5px solid var(--dark);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="stories">
+          <div class="story"><div class="story-ring"><div class="story-av">✦</div></div><div class="story-name">You</div></div>
+          <div class="story"><div class="story-ring"><div class="story-av">🌸</div></div><div class="story-name">Lumière</div></div>
+          <div class="story"><div class="story-ring"><div class="story-av">💄</div></div><div class="story-name">Makeba</div></div>
+          <div class="story"><div class="story-ring seen"><div class="story-av">🌿</div></div><div class="story-name">Soléa</div></div>
+          <div class="story"><div class="story-ring seen"><div class="story-av">✨</div></div><div class="story-name">Naomi</div></div>
+        </div>
+        <div class="feed-tabs">
+          <div class="ftab active">For You</div>
+          <div class="ftab">Following</div>
+          <div class="ftab">Nearby</div>
+        </div>
+        <div class="scroll">
+          <!-- POST 1 -->
+          <div class="post">
+            <div class="post-header">
+              <div class="post-author">
+                <div class="post-av">🌸</div>
+                <div><div class="post-name">Salon Lumière</div><div class="post-loc">Douala · Akwa</div></div>
+              </div>
+              <span style="color:var(--muted);cursor:pointer;">···</span>
+            </div>
+            <div class="post-img">
+              <div class="post-img-bg" style="background:linear-gradient(160deg,#2D1F1A,#1A0F0C,#3D2518);">
+                <div class="post-deco" style="width:180px;height:180px;background:var(--accent);top:-50px;right:-30px;opacity:0.3;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1;">
+                  <div style="width:90px;height:90px;border-radius:50%;background:rgba(201,149,106,0.1);border:1px dashed rgba(201,149,106,0.3);display:flex;align-items:center;justify-content:center;font-size:34px;">🌸</div>
+                  <div style="font-size:10px;color:rgba(247,243,238,0.25);letter-spacing:2px;">HAIRSTYLE PHOTO</div>
+                </div>
+              </div>
+              <div class="bookable-tag" style="bottom:18px;left:14px;" onclick="openBS()">
+                <div class="tag-dot"></div>
+                <div class="tag-info"><div class="tag-salon">Salon Lumière</div><div class="tag-service">Box Braids · 15 000 F</div></div>
+              </div>
+            </div>
+            <div class="post-actions">
+              <div class="post-acts-left">
+                <div class="act-btn liked"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>2.4k</span></div>
+                <div class="act-btn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>84</span></div>
+                <div class="act-btn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+              </div>
+              <div class="act-btn"><svg viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            </div>
+            <div class="post-caption"><span class="cap-name">Salon Lumière</span><span style="color:var(--muted);font-size:12px;">Fresh box braids ✨ Tap to book <span class="cap-tag">#braids #douala</span></span></div>
+          </div>
+          <!-- POST 2 -->
+          <div class="post">
+            <div class="post-header">
+              <div class="post-author">
+                <div class="post-av" style="border-color:rgba(255,255,255,0.15);">💄</div>
+                <div><div class="post-name">Makeba Beauty</div><div class="post-loc">Dar es Salaam · At home</div></div>
+              </div>
+              <span style="color:var(--muted);cursor:pointer;">···</span>
+            </div>
+            <div class="post-img">
+              <div class="post-img-bg" style="background:linear-gradient(160deg,#1A1A2E,#16213E,#0F3460);">
+                <div class="post-deco" style="width:160px;height:160px;background:#4A90D9;top:-40px;left:-20px;opacity:0.3;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1;">
+                  <div style="width:90px;height:90px;border-radius:50%;background:rgba(74,144,217,0.1);border:1px dashed rgba(74,144,217,0.3);display:flex;align-items:center;justify-content:center;font-size:34px;">💄</div>
+                  <div style="font-size:10px;color:rgba(247,243,238,0.25);letter-spacing:2px;">MAKEUP VIDEO</div>
+                </div>
+              </div>
+              <div class="bookable-tag" style="bottom:18px;left:14px;" onclick="openBS()">
+                <div class="tag-dot"></div>
+                <div class="tag-info"><div class="tag-salon">Makeba Beauty</div><div class="tag-service">Bridal Makeup · 45 000 F</div></div>
+                <div class="tag-home">🏠 Home</div>
+              </div>
+            </div>
+            <div class="post-actions">
+              <div class="post-acts-left">
+                <div class="act-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>1.8k</span></div>
+                <div class="act-btn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>56</span></div>
+              </div>
+            </div>
+            <div class="post-caption"><span class="cap-name">Makeba Beauty</span><span style="color:var(--muted);font-size:12px;">I come to you 🌍 Book your bridal look <span class="cap-tag">#makeup #bridal</span></span></div>
+          </div>
+        </div>
+        <!-- BOTTOM NAV -->
+        <div class="bottomnav">
+          <div class="bn-item active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bn-label">Feed</span></div>
+          <div class="bn-item" onclick="goTo('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span class="bn-label">Search</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item" onclick="goTo('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bn-label">Chat</span></div>
+          <div class="bn-item" onclick="goTo('userprofile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+        <!-- BOOKING BOTTOM SHEET -->
+        <div class="bs-overlay" id="bs-overlay" onclick="closeBS()"></div>
+        <div class="bs" id="bs">
+          <div class="bs-handle"></div>
+          <div class="bs-cover">
+            <div class="bs-cover-bg"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.15;">🌸</div><div style="width:120px;height:120px;border-radius:50%;filter:blur(40px);background:var(--accent);opacity:0.3;position:absolute;top:-20px;right:-20px;"></div></div>
+            <div class="bs-cover-overlay"></div>
+            <div class="bs-salon-av">🌸</div>
+          </div>
+          <div class="bs-body">
+            <div class="bs-salon-row"><div class="bs-salon-name">Salon Lumière</div><div class="bs-rating">⭐ 4.9 <span style="color:var(--muted);font-size:11px;">(127)</span></div></div>
+            <div class="bs-meta"><div class="bs-meta-item">Douala · Akwa</div><div class="bs-meta-item">Open now</div><div class="bs-meta-item">1.2 km</div></div>
+            <div class="service-item selected" onclick="selectSvc(this)"><div><div class="svc-name">Box Braids</div><div class="svc-dur">2h 30min</div></div><div class="svc-price">15 000 F</div></div>
+            <div class="service-item" onclick="selectSvc(this)"><div><div class="svc-name">Senegalese Twists</div><div class="svc-dur">3h</div></div><div class="svc-price">18 000 F</div></div>
+            <div class="slots-label">Next available</div>
+            <div class="slots-row">
+              <div class="slot selected" onclick="selectSlot(this)"><div class="slot-day">Today</div>14:00</div>
+              <div class="slot" onclick="selectSlot(this)"><div class="slot-day">Today</div>16:30</div>
+              <div class="slot" onclick="selectSlot(this)"><div class="slot-day">Tmrw</div>10:00</div>
+              <div class="slot" onclick="selectSlot(this)"><div class="slot-day">Tmrw</div>14:00</div>
+              <div class="slot unavail"><div class="slot-day">Thu</div>11:00</div>
+            </div>
+            <div class="bs-cta">
+              <button class="btn-primary" id="book-btn" onclick="confirmBook()">Book Now — 15 000 F</button>
+              <div class="bs-profile-btn" onclick="goTo('provider');closeBS();"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 5: SEARCH ============ -->
+      <div class="screen" id="screen-search">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="nav-logo">EL<span>Y</span>SIAN</div>
+          <div class="nav-actions">
+            <div class="nav-icon-btn"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--cream);stroke-width:1.5;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+          </div>
+        </div>
+        <div class="search-bar-wrap">
+          <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input class="search-input" placeholder="Service, salon, style...">
+          </div>
+        </div>
+        <div class="filters-row">
+          <div class="filter-chip active">All</div>
+          <div class="filter-chip">Salons</div>
+          <div class="filter-chip">At Home</div>
+          <div class="filter-chip">Hair</div>
+          <div class="filter-chip">Makeup</div>
+          <div class="filter-chip">Nails</div>
+          <div class="filter-chip">Available today</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0 16px;margin-bottom:12px;flex-shrink:0;">
+          <div style="font-size:12px;color:var(--muted);">48 results near you</div>
+          <div class="map-btn"><svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Map view</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;">
+          <div class="result-item" onclick="goTo('provider')">
+            <div class="result-img" style="background:linear-gradient(135deg,#2D1F1A,#3D2518);">🌸</div>
+            <div class="result-info">
+              <div class="result-name">Salon Lumière</div>
+              <div class="result-meta">Douala · Akwa · 1.2 km</div>
+              <div style="margin-top:4px;"><span class="tag-pill tag-accent" style="font-size:10px;">Open now</span> <span class="tag-pill tag-muted" style="font-size:10px;">🟢 Reliable</span></div>
+            </div>
+            <div class="result-right"><div class="result-price">From 8 000 F</div><div class="result-rating">⭐ 4.9 (127)</div></div>
+          </div>
+          <div class="result-item" onclick="goTo('provider')">
+            <div class="result-img" style="background:linear-gradient(135deg,#1A1A2E,#16213E);">💄</div>
+            <div class="result-info">
+              <div class="result-name">Makeba Beauty</div>
+              <div class="result-meta">At home · Dar es Salaam</div>
+              <div style="margin-top:4px;"><span class="tag-pill tag-accent" style="font-size:10px;">🏠 Home</span></div>
+            </div>
+            <div class="result-right"><div class="result-price">From 20 000 F</div><div class="result-rating">⭐ 4.8 (89)</div></div>
+          </div>
+          <div class="result-item" onclick="goTo('provider')">
+            <div class="result-img" style="background:linear-gradient(135deg,#1A2A1A,#1A3D1A);">💅</div>
+            <div class="result-info">
+              <div class="result-name">Nail Studio Zen</div>
+              <div class="result-meta">Tunis · Lac 1 · 2.8 km</div>
+              <div style="margin-top:4px;"><span class="tag-pill tag-accent" style="font-size:10px;">Open now</span></div>
+            </div>
+            <div class="result-right"><div class="result-price">From 12 000 F</div><div class="result-rating">⭐ 4.7 (64)</div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-img" style="background:linear-gradient(135deg,#2A1A2A,#3D1A3D);">🌿</div>
+            <div class="result-info">
+              <div class="result-name">Soléa Skincare</div>
+              <div class="result-meta">Douala · Bonapriso · 3.1 km</div>
+            </div>
+            <div class="result-right"><div class="result-price">From 15 000 F</div><div class="result-rating">⭐ 4.6 (41)</div></div>
+          </div>
+        </div>
+        <div class="bottomnav">
+          <div class="bn-item" onclick="goTo('feed')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bn-label">Feed</span></div>
+          <div class="bn-item active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span class="bn-label">Search</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item" onclick="goTo('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bn-label">Chat</span></div>
+          <div class="bn-item" onclick="goTo('userprofile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 6: PROVIDER PROFILE ============ -->
+      <div class="screen" id="screen-provider">
+        <div class="provider-cover">
+          <div class="provider-cover-bg" style="background:linear-gradient(160deg,#2D1F1A,#1A0F0C,#3D2518);">
+            <div style="width:150px;height:150px;border-radius:50%;filter:blur(50px);background:var(--accent);opacity:0.3;position:absolute;top:-30px;right:-20px;"></div>
+            <div style="font-size:64px;opacity:0.1;position:absolute;">🌸</div>
+          </div>
+          <div class="provider-cover-overlay"></div>
+          <div class="back-arrow" onclick="goTo('feed')"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div class="provider-av">🌸</div>
+        </div>
+        <div class="provider-body">
+          <div class="provider-row">
+            <div><div class="provider-name">Salon Lumière</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Douala · Akwa · 1.2 km away</div></div>
+            <div style="display:flex;gap:8px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg style="width:16px;height:16px;fill:none;stroke:var(--cream);stroke-width:1.5;" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg style="width:16px;height:16px;fill:none;stroke:var(--cream);stroke-width:1.5;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+            </div>
+          </div>
+          <div class="provider-badges" style="margin-bottom:16px;">
+            <span class="tag-pill tag-accent">⭐ 4.9</span>
+            <span class="tag-pill tag-muted">🟢 Highly Reliable</span>
+            <span class="tag-pill tag-muted">Open now</span>
+          </div>
+          <div class="card" style="margin-bottom:16px;">
+            <div class="provider-stats">
+              <div class="pstat"><div class="pstat-val">127</div><div class="pstat-label">Reviews</div></div>
+              <div class="pstat"><div class="pstat-val">4.9</div><div class="pstat-label">Rating</div></div>
+              <div class="pstat"><div class="pstat-val">2.1k</div><div class="pstat-label">Bookings</div></div>
+            </div>
+          </div>
+          <div class="section-label">Services</div>
+          <div class="services-list">
+            <div class="svc-row"><div><div class="svc-name" style="font-size:14px;color:var(--cream);">Box Braids</div><div class="svc-dur">2h 30min</div></div><div style="display:flex;align-items:center;gap:10px;"><div class="svc-price">15 000 F</div><button class="btn-primary" style="padding:8px 14px;font-size:12px;width:auto;" onclick="openBS()">Book</button></div></div>
+            <div class="svc-row"><div><div class="svc-name" style="font-size:14px;color:var(--cream);">Senegalese Twists</div><div class="svc-dur">3h</div></div><div style="display:flex;align-items:center;gap:10px;"><div class="svc-price">18 000 F</div><button class="btn-primary" style="padding:8px 14px;font-size:12px;width:auto;">Book</button></div></div>
+            <div class="svc-row"><div><div class="svc-name" style="font-size:14px;color:var(--cream);">Natural Locs</div><div class="svc-dur">4h</div></div><div style="display:flex;align-items:center;gap:10px;"><div class="svc-price">25 000 F</div><button class="btn-primary" style="padding:8px 14px;font-size:12px;width:auto;">Book</button></div></div>
+          </div>
+          <div class="section-label" style="margin-top:20px;">Portfolio</div>
+          <div class="portfolio-grid">
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#2D1F1A,#3D2518);">🌸</div>
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#1A2A1A,#1A3D1A);">🌿</div>
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#2A1A2A,#3D1A3D);">✨</div>
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#2A2A1A,#3D3D1A);">💆</div>
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#1A1A2E,#16213E);">🎨</div>
+            <div class="portfolio-item" style="background:linear-gradient(135deg,#2D1F1A,#1A0F0C);">👑</div>
+          </div>
+          <div class="section-label" style="margin-top:20px;">Reviews</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="font-size:32px;font-family:'Cormorant Garamond',serif;color:var(--cream);">4.9</div>
+            <button class="btn-secondary" style="width:auto;padding:8px 16px;font-size:12px;" onclick="goTo('reviews')">See all 127 →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 7: CHAT ============ -->
+      <div class="screen" id="screen-chat">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="chat-header">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('feed')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div class="chat-av">🌸</div>
+          <div class="chat-info">
+            <div class="chat-name">Salon Lumière</div>
+            <div class="chat-booking">Booking #EL-2041 · Today 14:00</div>
+          </div>
+          <div style="margin-left:auto;"><svg style="width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.5;cursor:pointer;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+        </div>
+        <div class="booking-card-chat">
+          <div class="bcc-label">Your upcoming booking</div>
+          <div class="bcc-service">Box Braids — 2h 30min</div>
+          <div class="bcc-detail">Today at 14:00 · 15 000 FCFA · On-site payment</div>
+          <div style="margin-top:10px;display:flex;gap:8px;"><span class="tag-pill tag-green" style="font-size:10px;">✓ Confirmed</span><span class="tag-pill tag-muted" style="font-size:10px;">Today</span></div>
+        </div>
+        <div class="chat-msgs">
+          <div style="text-align:center;font-size:11px;color:var(--muted);margin:8px 0;">Chat opened · Booking confirmed</div>
+          <div class="msg received">
+            <div class="msg-bubble">Hello! Your appointment is confirmed for today at 14:00. See you soon ✨</div>
+            <div class="msg-time">11:32</div>
+          </div>
+          <div class="msg sent">
+            <div class="msg-bubble">Thank you! Quick question — can I arrive 5 min early?</div>
+            <div class="msg-time">11:45</div>
+          </div>
+          <div class="msg received">
+            <div class="msg-bubble">Of course, no problem at all! We'll be ready for you 😊</div>
+            <div class="msg-time">11:47</div>
+          </div>
+          <div class="msg sent">
+            <div class="msg-bubble">Perfect, see you then!</div>
+            <div class="msg-time">11:48</div>
+          </div>
+        </div>
+        <div class="chat-input-wrap">
+          <input class="chat-input" placeholder="Write a message...">
+          <div class="chat-send"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 8: USER PROFILE ============ -->
+      <div class="screen" id="screen-userprofile">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="nav-logo" style="font-size:18px;">My <span>Profile</span></div>
+          <div class="nav-actions">
+            <div class="nav-icon-btn"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--cream);stroke-width:1.5;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          </div>
+        </div>
+        <div class="profile-header">
+          <div class="avatar avatar-lg avatar-bordered" style="background:linear-gradient(135deg,#2D1F1A,#3D2518);font-size:28px;">✿</div>
+          <div class="profile-info">
+            <div class="profile-name">Amara Koné</div>
+            <div class="profile-handle">@amara.kone · Douala</div>
+            <div style="margin-top:8px;display:flex;gap:6px;">
+              <button class="btn-primary" style="padding:8px 16px;font-size:12px;width:auto;">Edit Profile</button>
+              <button class="btn-secondary" style="padding:8px 14px;font-size:12px;width:auto;">Share</button>
+            </div>
+          </div>
+        </div>
+        <div class="profile-stats-row">
+          <div class="psr-item"><div class="psr-val">24</div><div class="psr-label">Bookings</div></div>
+          <div class="psr-item"><div class="psr-val">8</div><div class="psr-label">Reviews</div></div>
+          <div class="psr-item"><div class="psr-val">12</div><div class="psr-label">Saved</div></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:78px;">
+          <div style="padding:16px 16px 8px;"><div class="section-label">Upcoming</div></div>
+          <div class="booking-hist-item">
+            <div class="bhi-img" style="background:linear-gradient(135deg,#2D1F1A,#3D2518);">🌸</div>
+            <div class="bhi-info">
+              <div class="bhi-name">Salon Lumière</div>
+              <div class="bhi-detail">Box Braids · Today 14:00</div>
+            </div>
+            <div class="bhi-status upcoming">Upcoming</div>
+          </div>
+          <div style="padding:16px 16px 8px;"><div class="section-label">Past bookings</div></div>
+          <div class="booking-hist-item">
+            <div class="bhi-img" style="background:linear-gradient(135deg,#1A2A1A,#1A3D1A);">💅</div>
+            <div class="bhi-info">
+              <div class="bhi-name">Nail Studio Zen</div>
+              <div class="bhi-detail">Nail Art · Mar 15 · 10:00</div>
+            </div>
+            <div class="bhi-status completed">Completed</div>
+          </div>
+          <div class="booking-hist-item">
+            <div class="bhi-img" style="background:linear-gradient(135deg,#1A1A2E,#16213E);">💄</div>
+            <div class="bhi-info">
+              <div class="bhi-name">Makeba Beauty</div>
+              <div class="bhi-detail">Makeup · Mar 10 · 09:00</div>
+            </div>
+            <div class="bhi-status completed">Completed</div>
+          </div>
+          <div class="booking-hist-item">
+            <div class="bhi-img" style="background:linear-gradient(135deg,#2A1A2A,#3D1A3D);">🌿</div>
+            <div class="bhi-info">
+              <div class="bhi-name">Soléa Skincare</div>
+              <div class="bhi-detail">Facial · Mar 5 · 15:00</div>
+            </div>
+            <div class="bhi-status completed">Completed</div>
+          </div>
+        </div>
+        <div class="bottomnav">
+          <div class="bn-item" onclick="goTo('feed')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bn-label">Feed</span></div>
+          <div class="bn-item" onclick="goTo('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span class="bn-label">Search</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item" onclick="goTo('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bn-label">Chat</span></div>
+          <div class="bn-item active"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 9: REVIEWS ============ -->
+      <div class="screen" id="screen-reviews">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('provider')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);">Reviews <span style="color:var(--accent);font-style:italic;">& Ratings</span></div>
+          <div style="width:36px;"></div>
+        </div>
+        <div class="review-summary">
+          <div class="review-big-score">4.9</div>
+          <div class="review-stars-big">★★★★★</div>
+          <div class="review-count">Based on 127 verified reviews</div>
+        </div>
+        <div class="review-bars">
+          <div class="review-bar-row"><div class="rbar-label">5</div><div class="rbar-track"><div class="rbar-fill" style="width:78%;"></div></div><div class="rbar-pct">78%</div></div>
+          <div class="review-bar-row"><div class="rbar-label">4</div><div class="rbar-track"><div class="rbar-fill" style="width:15%;"></div></div><div class="rbar-pct">15%</div></div>
+          <div class="review-bar-row"><div class="rbar-label">3</div><div class="rbar-track"><div class="rbar-fill" style="width:5%;"></div></div><div class="rbar-pct">5%</div></div>
+          <div class="review-bar-row"><div class="rbar-label">2</div><div class="rbar-track"><div class="rbar-fill" style="width:1%;"></div></div><div class="rbar-pct">1%</div></div>
+          <div class="review-bar-row"><div class="rbar-label">1</div><div class="rbar-track"><div class="rbar-fill" style="width:1%;"></div></div><div class="rbar-pct">1%</div></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:80px;">
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-user">
+                <div class="review-av">✿</div>
+                <div><div class="review-name">Amara K.</div><div class="review-date">Mar 15 · <span style="color:var(--accent);">★★★★★</span></div></div>
+              </div>
+              <span class="tag-pill tag-accent" style="font-size:10px;">Verified</span>
+            </div>
+            <div class="review-text">Absolutely loved it! The braids are perfect and the service was so professional. Will definitely be back. Highly recommend to anyone in Douala.</div>
+            <div class="review-photo">🌸</div>
+          </div>
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-user">
+                <div class="review-av">🌿</div>
+                <div><div class="review-name">Fatou M.</div><div class="review-date">Mar 10 · <span style="color:var(--accent);">★★★★★</span></div></div>
+              </div>
+              <span class="tag-pill tag-accent" style="font-size:10px;">Verified</span>
+            </div>
+            <div class="review-text">Best salon in Akwa! Always on time, clean space, and the results speak for themselves. 5 stars every time.</div>
+          </div>
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-user">
+                <div class="review-av">💄</div>
+                <div><div class="review-name">Zineb R.</div><div class="review-date">Mar 3 · <span style="color:var(--accent);">★★★★☆</span></div></div>
+              </div>
+              <span class="tag-pill tag-accent" style="font-size:10px;">Verified</span>
+            </div>
+            <div class="review-text">Great service, the twists looked beautiful. Only took slightly longer than expected but worth the wait!</div>
+          </div>
+        </div>
+        <div class="write-review-bar">
+          <button class="btn-primary" style="font-size:13px;">Write a Review</button>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 10: DASHBOARD ============ -->
+      <div class="screen" id="screen-dashboard">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="dash-header">
+          <div class="dash-greeting">Good morning,</div>
+          <div class="dash-name">Salon <span>Lumière</span></div>
+        </div>
+        <div class="dash-stats">
+          <div class="ds-card">
+            <div class="ds-val">12</div>
+            <div class="ds-label">Today</div>
+            <div class="ds-trend">↑ +3 vs yesterday</div>
+          </div>
+          <div class="ds-card">
+            <div class="ds-val">89k</div>
+            <div class="ds-label">This month</div>
+            <div class="ds-trend">↑ +12%</div>
+          </div>
+          <div class="ds-card">
+            <div class="ds-val">4.9</div>
+            <div class="ds-label">Rating</div>
+            <div class="ds-trend" style="color:var(--accent);">★ 127 reviews</div>
+          </div>
+        </div>
+        <div class="dash-tab-row">
+          <div class="dtab active">Today</div>
+          <div class="dtab">This week</div>
+          <div class="dtab">Month</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:78px;">
+          <div style="padding:14px 20px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Upcoming · 3 bookings</div>
+          <div class="booking-item">
+            <div class="bi-time"><div class="bi-hour">14:00</div><div class="bi-ampm">PM</div></div>
+            <div class="bi-line confirmed"></div>
+            <div class="bi-info"><div class="bi-name">Amara Koné</div><div class="bi-service">Box Braids · 2h 30min</div></div>
+            <div class="bi-status confirmed">Confirmed</div>
+          </div>
+          <div class="booking-item">
+            <div class="bi-time"><div class="bi-hour">16:30</div><div class="bi-ampm">PM</div></div>
+            <div class="bi-line pending"></div>
+            <div class="bi-info"><div class="bi-name">Fatou Mbaye</div><div class="bi-service">Senegalese Twists · 3h</div></div>
+            <div class="bi-status pending">Pending</div>
+          </div>
+          <div class="booking-item">
+            <div class="bi-time"><div class="bi-hour">10:00</div><div class="bi-ampm">AM</div></div>
+            <div class="bi-line confirmed"></div>
+            <div class="bi-info"><div class="bi-name">Zineb Rahali</div><div class="bi-service">Natural Locs · 4h</div></div>
+            <div class="bi-status confirmed">Confirmed</div>
+          </div>
+          <div style="padding:14px 20px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Quick actions</div>
+          <div style="display:flex;gap:10px;padding:0 20px 16px;flex-wrap:wrap;">
+            <button class="btn-secondary" style="flex:1;font-size:12px;padding:11px 0;">+ New Post</button>
+            <button class="btn-secondary" style="flex:1;font-size:12px;padding:11px 0;">Availability</button>
+            <button class="btn-secondary" style="flex:1;font-size:12px;padding:11px 0;">Analytics</button>
+          </div>
+          <div style="padding:0 20px;"><div style="background:rgba(201,149,106,0.08);border:1px solid rgba(201,149,106,0.2);border-radius:12px;padding:14px;">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">🔥 Almost at your limit</div>
+            <div style="font-size:13px;color:var(--cream);margin-bottom:4px;">18 / 20 bookings used this month</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Upgrade to Pro for unlimited bookings</div>
+            <button class="btn-primary" style="font-size:12px;padding:10px;">Upgrade to Pro</button>
+          </div></div>
+        </div>
+        <div class="bottomnav">
+          <div class="bn-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span class="bn-label">Dashboard</span></div>
+          <div class="bn-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="bn-label">Bookings</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item" onclick="goTo('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bn-label">Chat</span></div>
+          <div class="bn-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+      </div>
+
+    </div><!-- phone-screen - DO NOT REMOVE -->
+
+      <!-- ============ SCREEN 11: NOTIFICATIONS ============ -->
+      <div class="screen" id="screen-notifications">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);">Notifications</div>
+          <button style="background:transparent;border:none;color:var(--accent);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:1px;">Mark all read</button>
+        </div>
+        <div class="scroll">
+          <div style="padding:8px 16px 6px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Today</div>
+          <!-- notif item -->
+          <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(201,149,106,0.04);">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1.5px solid var(--accent);">🌸</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;color:var(--cream);font-weight:500;margin-bottom:3px;">Booking Confirmed</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.5;">Salon Lumière confirmed your Box Braids for today at 14:00</div>
+              <div style="font-size:10px;color:var(--accent);margin-top:4px;">2 min ago</div>
+            </div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px;"></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(201,149,106,0.04);">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💄</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;color:var(--cream);font-weight:500;margin-bottom:3px;">New follower</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.5;">Makeba Beauty started following you</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px;">1h ago</div>
+            </div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px;"></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⏰</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;color:var(--cream);font-weight:500;margin-bottom:3px;">Reminder</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.5;">Your appointment at Salon Lumière is tomorrow at 14:00</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px;">3h ago</div>
+            </div>
+          </div>
+          <div style="padding:16px 16px 6px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Yesterday</div>
+          <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⭐</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;color:var(--cream);font-weight:500;margin-bottom:3px;">Leave a review</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.5;">How was your appointment at Nail Studio Zen? Share your experience.</div>
+              <div style="margin-top:8px;"><button class="btn-primary" style="padding:7px 14px;font-size:12px;width:auto;" onclick="goTo('reviews')">Write Review</button></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔥</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;color:var(--cream);font-weight:500;margin-bottom:3px;">Last minute slot!</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.5;">Salon Lumière just freed up a slot today at 16:30. Book now!</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px;">Yesterday · 18:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottomnav">
+          <div class="bn-item" onclick="goTo('feed')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bn-label">Feed</span></div>
+          <div class="bn-item" onclick="goTo('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span class="bn-label">Search</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item active" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div style="position:absolute;top:6px;right:14px;width:6px;height:6px;background:var(--accent);border-radius:50%;"></div><span class="bn-label">Alerts</span></div>
+          <div class="bn-item" onclick="goTo('userprofile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 12: BOOKING CONFIRMATION ============ -->
+      <div class="screen" id="screen-bookingconfirm">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;">
+          <div style="width:100px;height:100px;border-radius:50%;background:rgba(76,175,80,0.1);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:28px;animation:popIn 0.5s ease;">✓</div>
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;">Booking Confirmed</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--cream);margin-bottom:8px;">You're all set, <em style="color:var(--accent);">Amara!</em></div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:32px;">Your appointment has been confirmed. A WhatsApp message has been sent to your phone.</div>
+          <div style="width:100%;background:var(--card);border-radius:16px;padding:20px;margin-bottom:24px;border:1px solid rgba(201,149,106,0.15);">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--line);">
+              <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#2D1F1A,#3D2518);display:flex;align-items:center;justify-content:center;font-size:22px;">🌸</div>
+              <div style="text-align:left;">
+                <div style="font-size:15px;font-weight:500;color:var(--cream);">Salon Lumière</div>
+                <div style="font-size:12px;color:var(--muted);">Douala · Akwa</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div style="text-align:left;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Service</div><div style="font-size:13px;color:var(--cream);">Box Braids</div></div>
+              <div style="text-align:left;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Duration</div><div style="font-size:13px;color:var(--cream);">2h 30min</div></div>
+              <div style="text-align:left;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Date & Time</div><div style="font-size:13px;color:var(--cream);">Today · 14:00</div></div>
+              <div style="text-align:left;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Price</div><div style="font-size:13px;color:var(--accent);font-weight:500;">15 000 F</div></div>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px;">
+              <div style="font-size:11px;color:var(--muted);">Booking ref:</div>
+              <div style="font-size:11px;color:var(--accent);font-weight:500;letter-spacing:1px;">#EL-2041</div>
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-bottom:10px;" onclick="goTo('chat')">Open Booking Chat</button>
+          <button class="btn-secondary" onclick="goTo('feed')">Back to Feed</button>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 13: PROVIDER ONBOARDING ============ -->
+      <div class="screen" id="screen-provideronboard">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div style="padding:0 24px;display:flex;gap:4px;margin-bottom:20px;">
+          <div style="flex:1;height:3px;border-radius:2px;background:var(--accent);"></div>
+          <div style="flex:1;height:3px;border-radius:2px;background:var(--accent);"></div>
+          <div style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);"></div>
+          <div style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);"></div>
+          <div style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);"></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:0 24px 100px;">
+          <div class="section-label">Step 2 of 5</div>
+          <div class="screen-title" style="margin-bottom:6px;">Your <em>salon</em></div>
+          <div class="body-text" style="margin-bottom:24px;">Tell us about your business so clients can find and book you.</div>
+          <div style="display:flex;gap:0;margin-bottom:20px;">
+            <div id="tab-salon" style="flex:1;padding:11px;text-align:center;font-size:13px;background:var(--accent);color:var(--dark);border-radius:10px 0 0 10px;cursor:pointer;font-weight:500;">Salon</div>
+            <div id="tab-indep" style="flex:1;padding:11px;text-align:center;font-size:13px;background:rgba(255,255,255,0.05);color:var(--muted);border-radius:0 10px 10px 0;cursor:pointer;border:1px solid rgba(255,255,255,0.1);" onclick="switchProviderTab()">Independent</div>
+          </div>
+          <div style="text-align:center;margin-bottom:20px;">
+            <div style="width:80px;height:80px;border-radius:20px;background:var(--card);border:2px dashed rgba(201,149,106,0.4);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:4px;">
+              <span style="font-size:24px;">📷</span>
+              <span style="font-size:10px;color:var(--muted);">Logo</span>
+            </div>
+          </div>
+          <div class="input-group"><label class="input-label">Salon Name</label><input class="input-field" placeholder="Salon Lumière"></div>
+          <div class="input-group"><label class="input-label">Address</label><input class="input-field" placeholder="Rue de la Paix, Douala · Akwa"></div>
+          <div class="input-group"><label class="input-label">Phone</label><input class="input-field" placeholder="+237 6XX XXX XXX" type="tel"></div>
+          <div class="input-group"><label class="input-label">Bio</label><textarea class="input-field" style="height:80px;resize:none;" placeholder="Tell clients what makes your salon special..."></textarea></div>
+          <div class="input-group">
+            <label class="input-label">Specialties</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+              <div style="padding:6px 14px;border-radius:16px;border:1px solid var(--accent);color:var(--accent);font-size:12px;cursor:pointer;background:rgba(201,149,106,0.1);">Hair ✓</div>
+              <div style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:12px;cursor:pointer;">Makeup</div>
+              <div style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:12px;cursor:pointer;">Nails</div>
+              <div style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:12px;cursor:pointer;">Skincare</div>
+              <div style="padding:6px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:12px;cursor:pointer;">+ Add</div>
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-top:8px;">Continue</button>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 14: CREATE POST (PROVIDER) ============ -->
+      <div class="screen" id="screen-createpost">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('dashboard')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);">New <span style="color:var(--accent);font-style:italic;">Post</span></div>
+          <button class="btn-primary" style="padding:8px 18px;width:auto;font-size:13px;">Publish</button>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:0 16px 80px;">
+          <!-- Media upload -->
+          <div style="width:100%;aspect-ratio:4/5;background:var(--card);border-radius:16px;border:2px dashed rgba(201,149,106,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;cursor:pointer;position:relative;overflow:hidden;">
+            <div style="width:120px;height:120px;border-radius:50%;background:rgba(201,149,106,0.08);border:1px dashed rgba(201,149,106,0.3);display:flex;align-items:center;justify-content:center;font-size:44px;">📸</div>
+            <div style="font-size:14px;color:var(--muted);">Tap to add photo or video</div>
+            <div style="font-size:11px;color:var(--muted);opacity:0.6;">JPG, PNG, MP4 · Max 50MB</div>
+          </div>
+          <!-- Caption -->
+          <div class="input-group">
+            <label class="input-label">Caption</label>
+            <textarea class="input-field" style="height:80px;resize:none;" placeholder="Describe your work, add tips or inspiration..."></textarea>
+          </div>
+          <!-- Tag service -->
+          <div style="margin-bottom:16px;">
+            <div class="input-label" style="margin-bottom:8px;">Tag a bookable service</div>
+            <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;">
+              <div style="flex-shrink:0;padding:10px 16px;border-radius:12px;background:rgba(201,149,106,0.12);border:1.5px solid var(--accent);cursor:pointer;">
+                <div style="font-size:12px;font-weight:500;color:var(--cream);">Box Braids</div>
+                <div style="font-size:10px;color:var(--accent);">15 000 F</div>
+              </div>
+              <div style="flex-shrink:0;padding:10px 16px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.08);cursor:pointer;">
+                <div style="font-size:12px;color:var(--muted);">Senegalese Twists</div>
+                <div style="font-size:10px;color:var(--muted);">18 000 F</div>
+              </div>
+              <div style="flex-shrink:0;padding:10px 16px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.08);cursor:pointer;">
+                <div style="font-size:12px;color:var(--muted);">Natural Locs</div>
+                <div style="font-size:10px;color:var(--muted);">25 000 F</div>
+              </div>
+            </div>
+          </div>
+          <!-- Show price -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--card);border-radius:12px;margin-bottom:12px;">
+            <div><div style="font-size:13px;color:var(--cream);">Show price on post</div><div style="font-size:11px;color:var(--muted);">Clients see the price directly on the feed</div></div>
+            <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+          </div>
+          <!-- Hashtags -->
+          <div class="input-group">
+            <label class="input-label">Hashtags</label>
+            <input class="input-field" placeholder="#braids #beauty #douala">
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:-6px;">
+            <span style="font-size:11px;color:var(--accent);background:rgba(201,149,106,0.1);padding:3px 10px;border-radius:10px;cursor:pointer;">#braids</span>
+            <span style="font-size:11px;color:var(--accent);background:rgba(201,149,106,0.1);padding:3px 10px;border-radius:10px;cursor:pointer;">#naturalhair</span>
+            <span style="font-size:11px;color:var(--muted);background:rgba(255,255,255,0.04);padding:3px 10px;border-radius:10px;cursor:pointer;">#afro</span>
+            <span style="font-size:11px;color:var(--muted);background:rgba(255,255,255,0.04);padding:3px 10px;border-radius:10px;cursor:pointer;">#douala</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 15: AVAILABILITY ============ -->
+      <div class="screen" id="screen-availability">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('dashboard')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);">Availability</div>
+          <button class="btn-primary" style="padding:8px 16px;width:auto;font-size:12px;">Save</button>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:0 20px 80px;">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Set your weekly working hours. Elysian generates slots automatically.</div>
+          <!-- Days -->
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <!-- Day row -->
+            <div style="background:var(--card);border-radius:12px;padding:14px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="font-size:14px;font-weight:500;color:var(--cream);">Monday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Opens</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">09:00</div></div>
+                <div style="display:flex;align-items:flex-end;padding-bottom:8px;color:var(--muted);">—</div>
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Closes</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">19:00</div></div>
+              </div>
+            </div>
+            <div style="background:var(--card);border-radius:12px;padding:14px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="font-size:14px;font-weight:500;color:var(--cream);">Tuesday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Opens</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">09:00</div></div>
+                <div style="display:flex;align-items:flex-end;padding-bottom:8px;color:var(--muted);">—</div>
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Closes</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">19:00</div></div>
+              </div>
+            </div>
+            <div style="background:var(--card);border-radius:12px;padding:14px;opacity:0.5;">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:14px;color:var(--muted);">Wednesday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:rgba(255,255,255,0.08);position:relative;cursor:pointer;"><div style="position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.2);"></div></div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);margin-top:6px;">Closed</div>
+            </div>
+            <div style="background:var(--card);border-radius:12px;padding:14px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="font-size:14px;font-weight:500;color:var(--cream);">Thursday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Opens</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">10:00</div></div>
+                <div style="display:flex;align-items:flex-end;padding-bottom:8px;color:var(--muted);">—</div>
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Closes</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">18:00</div></div>
+              </div>
+            </div>
+            <div style="background:var(--card);border-radius:12px;padding:14px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="font-size:14px;font-weight:500;color:var(--cream);">Friday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Opens</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">09:00</div></div>
+                <div style="display:flex;align-items:flex-end;padding-bottom:8px;color:var(--muted);">—</div>
+                <div style="flex:1;"><div style="font-size:10px;color:var(--muted);margin-bottom:4px;">Closes</div><div style="padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:13px;color:var(--cream);">20:00</div></div>
+              </div>
+            </div>
+            <div style="background:var(--card);border-radius:12px;padding:14px;opacity:0.5;">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:14px;color:var(--muted);">Saturday</div>
+                <div style="width:44px;height:24px;border-radius:12px;background:rgba(255,255,255,0.08);position:relative;cursor:pointer;"><div style="position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.2);"></div></div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);margin-top:6px;">Closed</div>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:14px;background:rgba(201,149,106,0.06);border-radius:12px;border:1px solid rgba(201,149,106,0.15);">
+            <div style="font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px;">Slot duration</div>
+            <div style="font-size:12px;color:var(--muted);">Slots are generated based on each service's duration. A 2h service creates 2h blocks.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 16: SETTINGS ============ -->
+      <div class="screen" id="screen-settings">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('userprofile')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);">Settings</div>
+          <div style="width:36px;"></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:40px;">
+          <!-- Account -->
+          <div style="padding:14px 20px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Account</div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);cursor:pointer;">
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2D1F1A,#3D2518);display:flex;align-items:center;justify-content:center;font-size:18px;">✿</div>
+            <div style="flex:1;"><div style="font-size:14px;color:var(--cream);">Amara Koné</div><div style="font-size:12px;color:var(--muted);">amara@email.com</div></div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <!-- Settings rows -->
+          <div style="padding:14px 20px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Preferences</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);">
+            <div><div style="font-size:14px;color:var(--cream);">Push Notifications</div><div style="font-size:12px;color:var(--muted);">Bookings, reminders, alerts</div></div>
+            <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);">
+            <div><div style="font-size:14px;color:var(--cream);">WhatsApp Notifications</div><div style="font-size:12px;color:var(--muted);">Booking confirmations via WhatsApp</div></div>
+            <div style="width:44px;height:24px;border-radius:12px;background:var(--accent);position:relative;cursor:pointer;"><div style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--dark);"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);">
+            <div><div style="font-size:14px;color:var(--cream);">Language</div><div style="font-size:12px;color:var(--muted);">English</div></div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);">
+            <div><div style="font-size:14px;color:var(--cream);">Location</div><div style="font-size:12px;color:var(--muted);">Douala, Cameroon</div></div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div style="padding:14px 20px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">Privacy & Security</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);cursor:pointer;">
+            <div style="font-size:14px;color:var(--cream);">Change Password</div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);cursor:pointer;">
+            <div style="font-size:14px;color:var(--cream);">Privacy Policy</div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);cursor:pointer;">
+            <div style="font-size:14px;color:var(--cream);">Terms of Service</div>
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div style="padding:24px 20px;">
+            <button style="width:100%;padding:13px;background:transparent;border:1px solid rgba(224,86,86,0.3);border-radius:12px;color:#E05656;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;">Sign Out</button>
+          </div>
+          <div style="padding:0 20px 20px;">
+            <button style="width:100%;padding:13px;background:transparent;border:none;color:var(--muted);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:underline;">Delete Account</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 17: FORGOT PASSWORD ============ -->
+      <div class="screen" id="screen-forgotpw">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div style="padding:12px 20px 0;"><div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('login')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</div></div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:32px 24px;">
+          <div style="text-align:center;margin-bottom:36px;">
+            <div style="width:80px;height:80px;border-radius:50%;background:rgba(201,149,106,0.1);border:2px solid rgba(201,149,106,0.3);display:inline-flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px;">🔑</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--cream);margin-bottom:8px;">Forgot your <em style="color:var(--accent);">password?</em></div>
+            <div style="font-size:14px;color:var(--muted);line-height:1.7;">No worries. Enter your email and we'll send you a reset link.</div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email address</label>
+            <input class="input-field" placeholder="amara@email.com" type="email">
+          </div>
+          <button class="btn-primary" style="margin-top:8px;margin-bottom:16px;">Send Reset Link</button>
+          <div style="text-align:center;font-size:13px;color:var(--muted);">Remember your password? <button class="btn-ghost" onclick="goTo('login')">Sign in</button></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 18: BOOKINGS LIST (CLIENT) ============ -->
+      <div class="screen" id="screen-bookingslist">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);">My <span style="color:var(--accent);font-style:italic;">Bookings</span></div>
+        </div>
+        <div style="display:flex;border-bottom:1px solid var(--line);flex-shrink:0;">
+          <div style="flex:1;padding:12px;text-align:center;font-size:13px;color:var(--accent);border-bottom:2px solid var(--accent);cursor:pointer;">Upcoming</div>
+          <div style="flex:1;padding:12px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;">Past</div>
+          <div style="flex:1;padding:12px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;">Cancelled</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:78px;">
+          <!-- Upcoming booking card -->
+          <div style="margin:16px;background:var(--card);border-radius:16px;overflow:hidden;border:1px solid rgba(201,149,106,0.15);">
+            <div style="height:6px;background:var(--accent);"></div>
+            <div style="padding:16px;">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#2D1F1A,#3D2518);display:flex;align-items:center;justify-content:center;font-size:22px;">🌸</div>
+                <div style="flex:1;"><div style="font-size:15px;font-weight:500;color:var(--cream);">Salon Lumière</div><div style="font-size:12px;color:var(--muted);">Douala · Akwa</div></div>
+                <span style="font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;background:rgba(201,149,106,0.15);color:var(--accent);">Upcoming</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px;">Service</div><div style="font-size:13px;color:var(--cream);">Box Braids</div></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px;">Date & Time</div><div style="font-size:13px;color:var(--cream);">Today · 14:00</div></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px;">Duration</div><div style="font-size:13px;color:var(--cream);">2h 30min</div></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px;">Price</div><div style="font-size:13px;color:var(--accent);font-weight:500;">15 000 F</div></div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button class="btn-primary" style="flex:1;padding:10px;font-size:12px;" onclick="goTo('chat')">Open Chat</button>
+                <button class="btn-secondary" style="flex:1;padding:10px;font-size:12px;">Cancel</button>
+              </div>
+            </div>
+          </div>
+          <!-- Past -->
+          <div style="padding:0 16px 8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Coming up</div>
+          <div style="margin:0 16px 12px;background:var(--card);border-radius:14px;padding:14px;border:1px solid var(--line);">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1A2A1A,#1A3D1A);display:flex;align-items:center;justify-content:center;font-size:18px;">💅</div>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--cream);">Nail Studio Zen</div><div style="font-size:12px;color:var(--muted);">Friday · Mar 28 · 10:00</div></div>
+              <span style="font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;background:rgba(201,149,106,0.12);color:var(--accent);">In 5 days</span>
+            </div>
+          </div>
+        </div>
+        <div class="bottomnav">
+          <div class="bn-item" onclick="goTo('feed')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="bn-label">Feed</span></div>
+          <div class="bn-item" onclick="goTo('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span class="bn-label">Search</span></div>
+          <div class="bn-item"><div class="bn-center"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="bn-item active"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="bn-label">Bookings</span></div>
+          <div class="bn-item" onclick="goTo('userprofile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bn-label">Profile</span></div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 19: CLIENT POST (view full post) ============ -->
+      <div class="screen" id="screen-clientpost">
+        <div class="sbar"><span class="sbar-time">9:41</span></div>
+        <div class="topnav">
+          <div class="back-btn" style="margin-bottom:0;cursor:pointer;" onclick="goTo('feed')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);">Post</div>
+          <div style="width:36px;"></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:40px;">
+          <!-- Full post image -->
+          <div style="width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,#2D1F1A,#1A0F0C,#3D2518);display:flex;align-items:center;justify-content:center;position:relative;">
+            <div style="width:150px;height:150px;border-radius:50%;filter:blur(50px);background:var(--accent);opacity:0.3;position:absolute;top:-30px;right:-20px;"></div>
+            <div style="font-size:64px;opacity:0.12;position:absolute;">🌸</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1;">
+              <div style="width:120px;height:120px;border-radius:50%;background:rgba(201,149,106,0.1);border:1px dashed rgba(201,149,106,0.3);display:flex;align-items:center;justify-content:center;font-size:48px;">🌸</div>
+              <div style="font-size:11px;color:rgba(247,243,238,0.25);letter-spacing:2px;">FULL RESOLUTION</div>
+            </div>
+            <!-- Tag on full post -->
+            <div class="bookable-tag" style="bottom:20px;left:16px;" onclick="openBS()">
+              <div class="tag-dot"></div>
+              <div class="tag-info"><div class="tag-salon">Salon Lumière</div><div class="tag-service">Box Braids · 15 000 F</div></div>
+            </div>
+          </div>
+          <!-- Post details -->
+          <div style="padding:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:38px;height:38px;border-radius:50%;background:var(--card);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;">🌸</div>
+                <div><div style="font-size:14px;font-weight:500;color:var(--cream);">Salon Lumière</div><div style="font-size:11px;color:var(--muted);">Douala · Akwa · 2h ago</div></div>
+              </div>
+              <button style="padding:7px 14px;background:rgba(201,149,106,0.1);border:1px solid rgba(201,149,106,0.3);border-radius:20px;color:var(--accent);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;">Follow</button>
+            </div>
+            <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px;">Fresh box braids for our client Amara ✨ We love seeing the final result! Tap the tag below to book your appointment. <span style="color:var(--accent);">#braids #naturalhair #beauty #douala</span></div>
+            <div style="display:flex;align-items:center;gap:20px;padding-top:12px;border-top:1px solid var(--line);">
+              <div class="act-btn liked" style="color:var(--red);"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--red);stroke:var(--red);stroke-width:1.5;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="font-size:13px;color:var(--cream);">2.4k</span></div>
+              <div class="act-btn"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.5;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span style="font-size:13px;color:var(--muted);">84</span></div>
+              <div class="act-btn"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.5;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+              <div style="margin-left:auto;" class="act-btn"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.5;"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <!-- Booking bottom sheet (reused) -->
+        <div class="bs-overlay" id="bs-overlay2" onclick="document.getElementById('bs-overlay2').classList.remove('open');document.getElementById('bs2').classList.remove('open');"></div>
+        <div class="bs" id="bs2">
+          <div class="bs-handle"></div>
+          <div class="bs-body" style="padding-top:20px;">
+            <div class="bs-salon-row"><div class="bs-salon-name">Salon Lumière</div><div class="bs-rating">⭐ 4.9</div></div>
+            <div class="bs-meta"><div class="bs-meta-item">Douala · Akwa</div><div class="bs-meta-item">Open now</div></div>
+            <div class="service-item selected"><div><div class="svc-name">Box Braids</div><div class="svc-dur">2h 30min</div></div><div class="svc-price">15 000 F</div></div>
+            <div class="slots-label" style="margin-top:14px;">Next available</div>
+            <div class="slots-row"><div class="slot selected"><div class="slot-day">Today</div>14:00</div><div class="slot"><div class="slot-day">Today</div>16:30</div><div class="slot"><div class="slot-day">Tmrw</div>10:00</div></div>
+            <div class="bs-cta" style="margin-top:14px;"><button class="btn-primary" onclick="goTo('bookingconfirm');document.getElementById('bs-overlay2').classList.remove('open');document.getElementById('bs2').classList.remove('open');">Book Now — 15 000 F</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 20: STORIES ============ -->
+      <div class="screen" id="screen-stories">
+        <div style="position:relative;flex:1;background:#000;display:flex;flex-direction:column;">
+          <!-- Story progress bars -->
+          <div style="position:absolute;top:0;left:0;right:0;z-index:100;padding:14px 12px 0;display:flex;gap:4px;">
+            <div style="flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.9);"></div>
+            <div style="flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.3);"></div>
+            <div style="flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.3);"></div>
+          </div>
+          <!-- Story top bar -->
+          <div style="position:absolute;top:20px;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;padding:16px;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--card);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;">🌸</div>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#fff;">Salon Lumière</div><div style="font-size:11px;color:rgba(255,255,255,0.6);">2h ago</div></div>
+            <div style="cursor:pointer;" onclick="goTo('feed')"><svg style="width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          </div>
+          <!-- Story content -->
+          <div style="flex:1;background:linear-gradient(160deg,#2D1F1A,#1A0F0C,#3D2518);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+            <div style="width:200px;height:200px;border-radius:50%;filter:blur(60px);background:var(--accent);opacity:0.35;position:absolute;top:-40px;right:-40px;"></div>
+            <div style="width:150px;height:150px;border-radius:50%;filter:blur(50px);background:#8B4513;opacity:0.25;position:absolute;bottom:-30px;left:-20px;"></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;z-index:1;text-align:center;padding:0 32px;">
+              <div style="font-size:56px;">🌸</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;line-height:1.2;">New styles <em style="color:var(--accent);">available</em></div>
+              <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;">Book your appointment now and get the look you've always wanted</div>
+            </div>
+          </div>
+          <!-- Story bottom -->
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:100;padding:16px 16px 32px;">
+            <button class="btn-primary" style="margin-bottom:10px;" onclick="openBS()">Book Now ✦</button>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <input style="flex:1;padding:11px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:22px;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;" placeholder="Reply to Salon Lumière...">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- phone-screen -->
+
+<script>
+const screens = {
+  login: 'screen-login', register: 'screen-register', onboarding: 'screen-onboarding',
+  feed: 'screen-feed', search: 'screen-search', provider: 'screen-provider',
+  chat: 'screen-chat', userprofile: 'screen-userprofile', reviews: 'screen-reviews',
+  dashboard: 'screen-dashboard', notifications: 'screen-notifications',
+  bookingconfirm: 'screen-bookingconfirm', provideronboard: 'screen-provideronboard',
+  createpost: 'screen-createpost', availability: 'screen-availability',
+  settings: 'screen-settings', forgotpw: 'screen-forgotpw',
+  bookingslist: 'screen-bookingslist', clientpost: 'screen-clientpost',
+  stories: 'screen-stories'
+};
+
+function switchProviderTab() {
+  document.getElementById('tab-salon').style.background = 'rgba(255,255,255,0.05)';
+  document.getElementById('tab-salon').style.color = 'var(--muted)';
+  document.getElementById('tab-indep').style.background = 'var(--accent)';
+  document.getElementById('tab-indep').style.color = 'var(--dark)';
+}
+
+const navBtns = document.querySelectorAll('.snav-btn');
+const screenKeys = Object.keys(screens);
+
+function goTo(key) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screens[key]).classList.add('active');
+  navBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', screenKeys[i] === key);
+  });
+  closeBS();
+}
+
+function openBS() {
+  document.getElementById('bs-overlay').classList.add('open');
+  document.getElementById('bs').classList.add('open');
+}
+
+function closeBS() {
+  const o = document.getElementById('bs-overlay');
+  const b = document.getElementById('bs');
+  if (o) o.classList.remove('open');
+  if (b) b.classList.remove('open');
+}
+
+function selectSvc(el) {
+  document.querySelectorAll('.service-item').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectSlot(el) {
+  if (el.classList.contains('unavail')) return;
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleStyle(el) {
+  el.classList.toggle('selected');
+}
+
+function confirmBook() {
+  const btn = document.getElementById('book-btn');
+  btn.textContent = '✓ Booking Confirmed!';
+  btn.style.background = '#4CAF50';
+  setTimeout(() => {
+    closeBS();
+    btn.textContent = 'Book Now — 15 000 F';
+    btn.style.background = '';
+  }, 1800);
+}
+</script>
+</body>
+</html>
